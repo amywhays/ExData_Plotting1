@@ -11,12 +11,16 @@ colnames(md) <-names(read.table('household_power_consumption.txt', header=TRUE,s
 ## Combining the date and time fields to make it easier to convert the field class.
 dt <- paste(md$Date, md$Time, sep=" ")
 
-
+## Converting to date and time format
 datetime <- strptime(dt, format="%d/%m/%Y %H:%M:%S")
 
+## Adding the datetime field to the rest of the data.
 data <- cbind(datetime, md)
+
+## Opening the png device and writing the plot to it and then closing it.
 
 png(filename="./ExData_Plotting1/plot1.png", width = 480, height = 480)
 
 hist(data$Global_active_power, col="red", xlab="Global Active Power (kilowatts)", main="Global Active Power")
+
 dev.off()
